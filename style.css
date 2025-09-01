@@ -1,0 +1,185 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+  line-height: 1.5;
+  padding: 0; /* sem espaço extra no topo */
+}
+
+/* Header */
+header {
+  background: #9bc2f9;
+  padding: 8px 20px;
+}
+
+.nav-br {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-br .logo img {
+  height: 50px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.nav-list li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.nav-list .samu a {
+  background: #e67e22; 
+}
+
+.nav-list .bombeiro a {
+  background: #b22222;
+}
+
+.nav-list li a:hover {
+  opacity: 0.85;
+}
+
+/* Conteúdo */
+main {
+  margin: 15px 20px;
+}
+
+/* Botão emergência */
+.emergencia {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: #004aad;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.emergencia:hover {
+  background: #00307a;
+}
+
+/* Campos lado a lado */
+.linha {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.campo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input[type="time"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Container manipulação */
+#container-manipulacao {
+  margin-top: 20px;
+}
+
+.item1 {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: #0097b2;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.item1:hover {
+  background: #007a8f;
+}
+
+/* Painéis de controle */
+#container-manipulacao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.controles-row {
+  display: flex;
+  gap: 20px;
+}
+
+.item2, .item3 {
+  flex: 1;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.metronomo {
+  height: 100px;
+  width: 100px;
+  margin: 10px auto 0;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+#temporizador {
+  font-size: 32px;
+  font-weight: bold;
+  color: #004aad;
+}
+
+/* Botões extras */
+.controle-btns {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.controle-btns button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  background: #ddd;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.controle-btns button:hover {
+  background: #bbb;
+}

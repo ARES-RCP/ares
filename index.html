@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diana Santana Alves Chagas, Graziella Alves da Silva, Gregorio de Almeida Queiroz, Leonardo Melati Ambrosio">
+  <meta name="description" content="O aplicativo ARES oferece orientações visuais, sonoras e cronometradas para auxiliar na realização correta dos primeiros socorros enquanto o atendimento profissional está a caminho.">
+  <meta name="keywords" content="RCP, CPR, Reanimação Cardiopulmonar, ARES, SAMU, Emergência, SUS, Primeiros Socorros">
+  <title>ARES - Assistente de Reanimação em Situações de Emergência e Suporte</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="nav-br" aria-label="Menu principal">
+      <a href="#" class="logo" aria-label="Página inicial">
+        <img src="img/logo.png" alt="Logo do ARES - coração estilizado">
+      </a>
+      <ul class="nav-list">
+        <li class="item samu">
+          <a href="tel:192">SAMU <span>192</span></a>
+        </li>
+        <li class="item bombeiro">
+          <a href="tel:193">BOMBEIRO <span>193</span></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="container" aria-label="Chamado de emergência">
+      <button id="C" class="emergencia cabeca">LIGAR PARA EMERGÊNCIA - SAMU</button>
+
+      <h2>Coleta de informações</h2>
+
+      <!-- Campos lado a lado -->
+      <div class="linha">
+        <div class="campo">
+          <label for="horaInicio">Hora de Início</label>
+          <input type="time" id="horaInicio">
+        </div>
+        <div class="campo">
+          <label for="horaMalSubito">Hora Mal Súbito</label>
+          <input type="time" id="horaMalSubito">
+        </div>
+      </div>
+    </section>
+
+    <section class="flex-container" aria-label="Início da reanimação">
+      <h2 class="flex-controle">Reanimação Cardiopulmonar</h2>
+    </section>
+
+    <section id="container-manipulacao" aria-label="Controles de reanimação">
+      <!-- Botão principal -->
+      <button id="A" class="item1">INICIAR MASSAGEM CARDÍACA</button>
+
+      <!-- Controles lado a lado -->
+      <div class="controles-row">
+        <div class="item2" id="controle-metronomo">
+          <h3>Metrônomo</h3>
+          <div class="metronomo" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="item3">
+          <h3>Cronômetro</h3>
+          <p id="temporizador">120</p>
+        </div>
+      </div>
+
+      <!-- Botões extras -->
+      <div class="controle-btns">
+        <button type="button" onclick="TESTAR()">Testar</button>
+        <button type="button" onclick="resetar()">Resetar</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
