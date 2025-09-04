@@ -35,6 +35,35 @@
 
       <!-- Campos lado a lado -->
       <div class="linha">
+        <div class="campo">          
+          <label for="genero-pessoa">Gênero:</label>
+          <label>
+            <input type="radio" name="genero" value="masculino">
+            Masculino
+          </label>        
+          <label>
+            <input type="radio" name="genero" value="feminino">
+            Feminino
+          </label>
+        </div>
+        <div class="campo">
+          <label for="faixa-etaria">Faixa Etária:</label>
+            <select name="faixa-etaria" id="faixa-etaria">
+              <option value="-1">Selecione uma faixa</option>
+              <option value="0-2">Bebê</option>
+              <option value="3-10">3 a 10 anos</option>
+              <option value="11-17">13 a 17 anos</option>
+              <option value="18-24">18 a 24 anos</option>
+              <option value="25-34">25 a 34 anos</option>
+              <option value="35-44">35 a 44 anos</option>
+              <option value="45-64">45 a 64 anos</option>
+              <option value="65+">65 anos ou mais</option>
+            </select>
+        </div>
+
+      </div>
+      <hr>
+      <div class="linha">
         <div class="campo">
           <label for="horaInicio">Hora de Início</label>
           <input type="time" id="horaInicio">
@@ -62,16 +91,18 @@
         </div>
 
         <div class="item3">
-          <h3>Cronômetro</h3>
-          <p id="temporizador">120</p>
+          <div >
+            <h3>Cronômetro</h3>
+            <p id="temporizador">120</p>
+          </div>
+          <div>
+            <h3>Ciclos</h3>
+            <p id="ciclos">0</p>
+          </div>
         </div>
       </div>
 
-      <!-- Botões extras -->
-      <div class="controle-btns">
-        <button type="button" onclick="TESTAR()">Testar</button>
-        <button type="button" onclick="resetar()">Resetar</button>
-      </div>
+
     </section>
   </main>
 

@@ -1,15 +1,16 @@
 // ===============================
 // Variáveis globais de controle
 // ===============================
-let estadoMetronomo = 0;     // alternância do metrônomo (0/1)
+let estadoMetronomo = 0;         // alternância do metrônomo (0/1)
 let intervaloMetronomo = null;
 let intervaloTemporizador = null;
+let tempoRestante = 120;         // Agora é global
 
 // Elementos da página
 const botaoRcp = document.querySelector('.item1');   // botão Massagem
 const botaoEmg = document.querySelector('.cabeca');  // botão Emergência
 const temporizadorEl = document.querySelector('#temporizador');
-const circulo = document.querySelector('#circulo');  // círculo animado (imagens)
+const controle = document.querySelector('#controle-metronomo .metronomo');
 
 // ===============================
 // Eventos principais
@@ -21,7 +22,6 @@ botaoEmg.addEventListener('click', emergencia);
 // Funções de Emergência
 // ===============================
 function emergencia() {
-  // Verifica status do botão
   if (botaoEmg.id === 'C') {
     botaoEmg.textContent = 'EMERGÊNCIA A CAMINHO';
     botaoEmg.style.backgroundColor = '#00FF00';
@@ -63,37 +63,29 @@ function emergencia() {
 // ===============================
 // Funções do Metrônomo
 // ===============================
-function TESTAR() {
-  const controle = document.querySelector('#controle-metronomo .metronomo');
-
-  if (estadoMetronomo === 0) {
-    controle.classList.remove('desligado');
-    controle.classList.add('ligado');
-  } else {
-    controle.classList.remove('ligado');
-    controle.classList.add('desligado');
-  }
-
-  estadoMetronomo = (estadoMetronomo + 1) % 2;
-
-  iniciarAlternancia();
-}
-
 function iniciarAlternancia() {
   if (intervaloMetronomo !== null) return; // evita duplicar intervalos
-  intervaloMetronomo = setInterval(TESTAR, 500);
+
+  intervaloMetronomo = setInterval(() => {
+    if (estadoMetronomo === 0) {
+      controle.classList.remove('desligado');
+      controle.classList.add('ligado');
+    } else {
+      controle.classList.remove('ligado');
+      controle.classList.add('desligado');
+    }
+    estadoMetronomo = (estadoMetronomo + 1) % 2;
+  }, 500);
 }
 
 function resetar() {
-  const controle = document.querySelector('#controle-metronomo .metronomo');
-
-  // Parar o intervalo se estiver rodando
+  // Parar o intervalo do metrônomo
   if (intervaloMetronomo !== null) {
     clearInterval(intervaloMetronomo);
     intervaloMetronomo = null;
   }
 
-  // Resetar estados
+  // Resetar classe visual
   controle.classList.remove('ligado', 'desligado');
   estadoMetronomo = 0;
 }
@@ -102,22 +94,12 @@ function resetar() {
 // Funções de RCP (Massagem Cardíaca)
 // ===============================
 function iniciarPararRCP() {
-  const circulos = ['./img/circle1.png', './img/circle2.png'];
-  let indiceCirculo = 0;
-  let tempoRestante = 120;
-
   if (botaoRcp.id === 'A') {
     // Ativar RCP
     botaoRcp.style.backgroundColor = '#B22222';
     botaoRcp.textContent = 'PARAR MASSAGEM CARDÍACA';
 
-    // Iniciar metrônomo (círculos piscando)
-    intervaloMetronomo = setInterval(() => {
-      if (circulo) {
-        circulo.src = circulos[indiceCirculo];
-        indiceCirculo = (indiceCirculo + 1) % circulos.length;
-      }
-    }, 500);
+    iniciarAlternancia();
 
     // Iniciar temporizador
     intervaloTemporizador = setInterval(() => {
@@ -125,7 +107,7 @@ function iniciarPararRCP() {
         tempoRestante--;
         temporizadorEl.textContent = tempoRestante;
       } else {
-        tempoRestante = 120; // reinicia
+        tempoRestante = 120;
         temporizadorEl.textContent = tempoRestante;
       }
     }, 1000);
@@ -137,14 +119,14 @@ function iniciarPararRCP() {
     botaoRcp.textContent = 'INICIAR MASSAGEM CARDÍACA';
 
     // Parar metrônomo
-    clearInterval(intervaloMetronomo);
-    intervaloMetronomo = null;
-    if (circulo) circulo.src = './img/circle0.png';
+    resetar();
 
     // Parar temporizador
     clearInterval(intervaloTemporizador);
     intervaloTemporizador = null;
-    temporizadorEl.textContent = '120';
+
+    tempoRestante = 120;
+    temporizadorEl.textContent = tempoRestante;
 
     botaoRcp.id = 'A'; // Status inativo
   }

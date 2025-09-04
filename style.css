@@ -99,7 +99,7 @@ label {
   font-size: 14px;
 }
 
-input[type="time"] {
+input[type="time"], select {
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -156,6 +156,14 @@ input[type="time"] {
   margin: 10px auto 0;
   border-radius: 50%;
   background: #ccc;
+  /* border: 1px solid #000; */
+  transition: background-color 0.5s;
+}
+#controle-metronomo .metronomo.ligado{
+  background-color: green;
+}
+#controle-metronomo .metronomo.desligado{
+  background-color: red;
 }
 
 #temporizador {
@@ -163,23 +171,8 @@ input[type="time"] {
   font-weight: bold;
   color: #004aad;
 }
-
-/* Botões extras */
-.controle-btns {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.controle-btns button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
-  background: #ddd;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.controle-btns button:hover {
-  background: #bbb;
+#ciclos {
+  font-size: 32px;
+  font-weight: bold;
+  color: #004aad;
 }
