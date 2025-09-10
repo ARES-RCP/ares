@@ -106,6 +106,14 @@ input[type="time"], select {
   border-radius: 6px;
 }
 
+
+input[type="radio"] {
+  margin-left: 10px;
+  transform: scale(2); /* Aumenta o tamanho em 1.5x */
+  margin-right: 8px;     /* Espaço entre o botão e o texto */
+  cursor: pointer;       /* Mostra o cursor de clique */
+}
+
 /* Container manipulação */
 #container-manipulacao {
   margin-top: 20px;
@@ -158,12 +166,33 @@ input[type="time"], select {
   background: #ccc;
   /* border: 1px solid #000; */
   transition: background-color 0.5s;
+/*  animation: pulsar 1s infinite; *//* Adicionando animação */
+
 }
+@keyframes pulsar {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); /* Aumenta o tamanho */
+    opacity: 0.7; /* Diminui a opacidade */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 #controle-metronomo .metronomo.ligado{
   background-color: green;
+  animation: pulsar 1s infinite; /* Mantém animação enquanto estiver ligado */
+
 }
 #controle-metronomo .metronomo.desligado{
   background-color: red;
+  animation: pulsar 1s infinite; /* Mantém animação enquanto estiver desligado */
+
 }
 
 #temporizador {
