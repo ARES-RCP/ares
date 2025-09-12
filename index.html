@@ -38,7 +38,7 @@
         <div class="campo">          
           <label for="genero-pessoa">Gênero:</label>
           <label>
-            <input type="radio" name="genero" value="masculino">
+            <input type="radio" name="genero" value="masculino" checked> 
             Masculino
           </label>        
           <label>
@@ -49,10 +49,9 @@
         <div class="campo">
           <label for="perfil-etaria">Perfil Etário:</label>
             <select name="perfil-etaria" id="perfil-etaria">
-              <option value="-1">Selecione um perfil</option>
               <option value="bebe">Bebê</option>
               <option value="crianca">Criança</option>
-              <option value="adulto">Adulto</option>
+              <option value="adulto" selected>Adulto</option>
               <option value="idoso">Idoso</option>
               <option value="gestante">Gestante</option>
             </select>
@@ -101,8 +100,36 @@
 
 
     </section>
+
+    <hr>
+
+  <!-- <h3>Localização</h3> -->
+
+
+  <div>
+    <input type="text" id="detectedAddress" readonly>
+    <br>
+    <button onclick="mostrarMapa()">🔧 Corrigir localização</button>
+  </div>
+
+  <div id="mapContainer">
+    <div id="map"></div>
+    <div id="info">
+      <strong>Endereço atual:</strong>
+      <input type="text" id="address" readonly placeholder="Pesquise o endereço">
+      <br>
+      <strong>Latitude:</strong> <span id="lat"></span><br>
+      <strong>Longitude:</strong> <span id="lng"></span><br>
+      <button onclick="confirmarEndereco()">✅ Confirmar Localização</button>
+    </div>
+  </div>
+    <small>Endereço detectado automaticamente. Clique no botão para corrigir localização.</small>
+
+
   </main>
 
   <script src="script.js" defer></script>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCSVVcN3PyrmutpPrWAoMQDnX4u7g0wHE&callback=initMap" async defer></script>
 </body>
 </html>

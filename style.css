@@ -156,6 +156,7 @@ input[type="radio"] {
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom:20px;
 }
 
 .metronomo {
@@ -205,3 +206,49 @@ input[type="radio"] {
   font-weight: bold;
   color: #004aad;
 }
+
+/* Localização*/
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+ #map {
+  height: 400px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#mapContainer {
+  display: none;
+  margin-top: 20px;
+}
+
+#info {
+  display: none;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  max-width: 600px;
+  background: #f9f9f9;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+ }
+
+button:hover {
+  background-color: #155ab6;
+ }

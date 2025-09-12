@@ -131,3 +131,94 @@ function iniciarPararRCP() {
     botaoRcp.id = 'A'; // Status inativo
   }
 }
+
+// ===============================
+// Funções de LOCALIZAÇÃO
+// ===============================
+
+ let map, marker, geocoder, initialPos;
+
+    // Detecta a posição automaticamente ao carregar a página
+    window.onload = function () {
+      geocoder = new google.maps.Geocoder();
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            initialPos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            // Busca o endereço e exibe no campo inicial
+            geocoder.geocode({ location: initialPos }, (results, status) => {
+              if (status === "OK" && results[0]) {
+                document.getElementById("detectedAddress").value = results[0].formatted_address;
+              } else {
+                document.getElementById("detectedAddress").value = "Endereço não encontrado.";
+              }
+            });
+          },
+          () => {
+            alert("Não foi possível obter sua localização.");
+          }
+        );
+      } else {
+        alert("Seu navegador não suporta geolocalização.");
+      }
+    };
+
+    // Mostra o mapa interativo para ajuste
+    function mostrarMapa() {
+      document.getElementById("mapContainer").style.display = "block";
+      document.getElementById("info").style.display = "block";
+
+      if (!map) {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: initialPos,
+          zoom: 16
+        });
+
+        marker = new google.maps.Marker({
+          position: initialPos,
+          map: map,
+          draggable: true
+        });
+
+        atualizarEndereco(initialPos);
+
+        marker.addListener("dragend", () => {
+          const pos = marker.getPosition();
+          atualizarEndereco(pos);
+        });
+      }
+    }
+
+    function atualizarEndereco(latlng) {
+      const lat = typeof latlng.lat === "function" ? latlng.lat() : latlng.lat;
+      const lng = typeof latlng.lng === "function" ? latlng.lng() : latlng.lng;
+
+      document.getElementById("lat").textContent = lat.toFixed(6);
+      document.getElementById("lng").textContent = lng.toFixed(6);
+
+      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+        if (status === "OK" && results[0]) {
+          document.getElementById("address").value = results[0].formatted_address;
+        } else {
+          document.getElementById("address").value = "Endereço não encontrado.";
+        }
+      });
+    }
+
+    function confirmarEndereco() {
+      const endereco = document.getElementById("address").value;
+      const lat = document.getElementById("lat").textContent;
+      const lng = document.getElementById("lng").textContent;
+
+      document.getElementById("detectedAddress").value = endereco;
+
+      alert(`Novo endereço confirmado:\n\n${endereco}\nLat: ${lat}\nLng: ${lng}`);
+
+      // Opcional: Esconde o mapa após confirmação
+      document.getElementById("mapContainer").style.display = "none";
+    }
