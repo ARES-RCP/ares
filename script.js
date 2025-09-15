@@ -179,7 +179,7 @@ function iniciarPararRCP() {
           zoom: 16
         });
 
-        marker = new google.maps.Marker({
+        marker = new google.maps.AdvancedMarkerElement({
           position: initialPos,
           map: map,
           draggable: true
