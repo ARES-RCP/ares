@@ -173,26 +173,37 @@ function iniciarPararRCP() {
       document.getElementById("mapContainer").style.display = "block";
       document.getElementById("info").style.display = "block";
 
+      // Verifica se a posição inicial foi definida
+      if (!initialPos) {
+        console.warn("Posição inicial ainda não definida. O mapa será carregado quando a localização estiver disponível.");
+        return; // Sai da função até que initialPos esteja definido
+      }
+
+      // Cria o mapa apenas se ainda não tiver sido criado
       if (!map) {
         map = new google.maps.Map(document.getElementById("map"), {
           center: initialPos,
           zoom: 16
         });
 
-        marker = new google.maps.AdvancedMarkerElement({
+        // Cria o marcador AdvancedMarkerElement
+        marker = new google.maps.marker.AdvancedMarkerElement({
           position: initialPos,
           map: map,
           draggable: true
         });
 
+        // Atualiza o endereço no input
         atualizarEndereco(initialPos);
 
+        // Atualiza o endereço quando o usuário arrasta o marcador
         marker.addListener("dragend", () => {
           const pos = marker.getPosition();
           atualizarEndereco(pos);
         });
       }
     }
+
 
     function atualizarEndereco(latlng) {
       const lat = typeof latlng.lat === "function" ? latlng.lat() : latlng.lat;
