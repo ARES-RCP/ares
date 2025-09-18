@@ -135,7 +135,8 @@ function iniciarPararRCP() {
 
     // Iniciar massagem
     botaoRcp.style.backgroundColor = '#B22222';
-    botaoRcp.textContent = 'PARAR MASSAGEM CARDÍACA';
+    //botaoRcp.textContent = 'PARAR MASSAGEM CARDÍACA';
+    botaoRcp.textContent = dicionario.botaoRcp2;
     contador_ciclos += 1;
     contagem_ciclos.innerText = contador_ciclos;
 
