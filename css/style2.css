@@ -160,11 +160,14 @@ input[type="radio"] {
   margin-bottom:20px;
 }
 
+
+
 .metronomo {
-  height: 100px;
-  width: 100px;
-  margin: 10px auto 0;
-  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  /* margin: 10px auto 0; */
+  /*border-radius: 50%;*/
+
   background: #ccc;
   /* border: 1px solid #000; */
   transition: background-color 0.5s;

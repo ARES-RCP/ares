@@ -151,7 +151,8 @@ function iniciarPararRCP() {
   } else {
     // Parar massagem (sem encerrar ainda)
     botaoRcp.style.backgroundColor = '#0097b2';
-    botaoRcp.textContent = 'INICIAR MASSAGEM CARDÍACA';
+    botaoRcp.textContent = dicionario.botaoRcp;
+
 
     resetar();
     pararTemporizador();
@@ -227,7 +228,7 @@ function encerrarAtendimento() {
   resetar();
   pararTemporizador();
 
-  // Limpar a página (exemplo: reload total)
+  // Limpar a página 
   location.reload();
 }
 
