@@ -24,6 +24,7 @@
           <a href="tel:193">BOMBEIRO <span>193</span></a>
         </li>
       </ul>
+      <button id="tradutor" onclick="alternarModo()" title="Alterar perfil usuário"><img src="img/icone_tradutor_colorido.png"></button>
     </nav>
   </header>
 
@@ -72,40 +73,38 @@
     <hr>
     <section class="flex-container" aria-label="Início da reanimação">
       <h2 id="txtRcp" class="flex-controle">Reanimação Cardiopulmonar</h2>
-    </section>
+      <section id="container-manipulacao" aria-label="Controles de reanimação">
+        <!-- Botão principal -->
+        <button id="A" class="item1">INICIAR MASSAGEM CARDÍACA</button>
+        <!-- Controles lado a lado -->
+        <div class="controles-row">
+          <div class="item2" id="controle-metronomo">
+            <h3 id="txtQualidade">Qualidade da Compressão</h3>
+            <div class="metronomo" role="status" aria-live="polite"></div>
+          </div>
+          <div class="item3">
+              <div>
+                  <h3 id="txtCronometro">Cronômetro</h3>
+                  <p id="temporizador">120</p>
+              </div>
+              <div>
+                  <h3 id="txtCiclos">Ciclos</h3>
+                  <p id="ciclos">0</p>
+                  <!-- Botões de controle -->
+                  <button id="btnTrocar" style="display:none;">Próximo Socorrista</button>
+                  <button id="btnEncerrar" style="display:none;">Encerrar Atendimento</button>
+              </div>
+          </div>
 
-    <section id="container-manipulacao" aria-label="Controles de reanimação">
-      <!-- Botão principal -->
-      <button id="A" class="item1">INICIAR MASSAGEM CARDÍACA</button>
-      <!-- Controles lado a lado -->
-      <div class="controles-row">
-        <div class="item2" id="controle-metronomo">
-          <h3 id="txtQualidade">Qualidade da Compressão</h3>
-          <div class="metronomo" role="status" aria-live="polite"></div>
         </div>
-        <div class="item3">
-            <div>
-                <h3 id="txtCronometro">Cronômetro</h3>
-                <p id="temporizador">120</p>
-            </div>
-            <div>
-                <h3 id="txtCiclos">Ciclos</h3>
-                <p id="ciclos">0</p>
-                <!-- Botões de controle -->
-                <button id="btnTrocar" style="display:none;">Próximo Socorrista</button>
-                <button id="btnEncerrar" style="display:none;">Encerrar Atendimento</button>
-            </div>
-        </div>
-
-      </div>
 
 
+      </section>
     </section>
 
     <hr>
 
   <!-- <h3>Localização</h3> -->
-
 
   <div>
     <input type="text" id="detectedAddress" readonly>
@@ -128,7 +127,6 @@
 
 
   </main>
-      <button id="tradutor" onclick="alternarModo()">TRADUZIR</button>
   
  <script src="js/traducao.js"></script>
  <script src="js/script.js" defer></script>
