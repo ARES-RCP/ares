@@ -8,7 +8,7 @@
   <meta name="keywords" content="RCP, CPR, Reanimação Cardiopulmonar, ARES, SAMU, Emergência, SUS, Primeiros Socorros">
   <title>ARES - Assistente de Reanimação em Situações de Emergência e Suporte</title>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header>
@@ -88,17 +88,20 @@
           <h3>Execução da movimento</h3> -->
           <div class="metronomo" role="status" aria-live="polite"></div>
         </div>
-
         <div class="item3">
-          <div >
-            <h3>Cronômetro</h3>
-            <p id="temporizador">120</p>
-          </div>
-          <div>
-            <h3>Ciclos</h3>
-            <p id="ciclos">0</p>
-          </div>
+            <div>
+                <h3>Cronômetro</h3>
+                <p id="temporizador">120</p>
+            </div>
+            <div>
+                <h3>Ciclos</h3>
+                <p id="ciclos">0</p>
+                <!-- Botões de controle -->
+                <button id="btnTrocar" style="display:none;">Próximo Socorrista</button>
+                <button id="btnEncerrar" style="display:none;">Encerrar Atendimento</button>
+            </div>
         </div>
+
       </div>
 
 
@@ -131,7 +134,7 @@
 
   </main>
 
-  <script src="script.js" defer></script>
+  <script src="js/script.js" defer></script>
   
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCSVVcN3PyrmutpPrWAoMQDnX4u7g0wHE&callback=mostrarMapa" async defer></script>
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCSVVcN3PyrmutpPrWAoMQDnX4u7g0wHE&callback=mostrarMapa&libraries=marker&v=weekly" async defer></script> -->

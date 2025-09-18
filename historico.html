@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Histórico do Último Atendimento - ARES</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #004aad;
+    }
+    .info {
+      margin: 10px 0;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+    #btnPdf { margin-top: 20px; padding: 10px 20px; background-color: #007BFF; color: #fff; border: none; cursor: pointer; }
+    #btnPdf:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📋 Último Registro de Atendimento</h2>
+    <div class="info"><span class="label">Gênero:</span> <span id="genero"></span></div>
+    <div class="info"><span class="label">Perfil Etário:</span> <span id="perfil"></span></div>
+    <div class="info"><span class="label">Hora Início:</span> <span id="horaInicio"></span></div>
+    <div class="info"><span class="label">Hora Mal Súbito:</span> <span id="horaMalSubito"></span></div>
+    <div class="info"><span class="label">Ciclos Realizados:</span> <span id="ciclos"></span></div>
+    <div class="info"><span class="label">Endereço:</span> <span id="endereco"></span></div>
+    <div class="info"><span class="label">Acionamento da Emergência:</span> <span id="horaEmergencia"></span></div>
+    <div class="info"><span class="label">Encerramento Atendimento:</span> <span id="dataRegistro"></span></div>
+    <hr>
+    <button id="btnPdf">Salvar PDF</button>
+  </div>
+
+  <script src="js/jspdf.umd.min.js"></script>
+  <script>
+  // Recupera o último atendimento do localStorage
+  const atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
+  const atendimento = atendimentos[atendimentos.length - 1];
+
+  if (atendimento) {
+    document.getElementById("genero").textContent = atendimento.genero;
+    document.getElementById("perfil").textContent = atendimento.perfil;
+    document.getElementById("horaInicio").textContent = atendimento.horaInicio;
+    document.getElementById("horaMalSubito").textContent = atendimento.horaMalSubito;
+    document.getElementById("ciclos").textContent = atendimento.ciclos;
+    document.getElementById("endereco").textContent = atendimento.endereco;
+    document.getElementById("horaEmergencia").textContent = atendimento.horaEmergencia;
+    document.getElementById("dataRegistro").textContent = atendimento.dataRegistro;
+
+    // Botão salvar PDF
+    document.getElementById("btnPdf").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.text("Último Atendimento Registrado", 105, 20, { align: "center" });
+
+      doc.setFontSize(12);
+      let y = 40;
+      const campos = [
+        { label: "Gênero", valor: atendimento.genero },
+        { label: "Perfil Etário", valor: atendimento.perfil },
+        { label: "Hora de Início", valor: atendimento.horaInicio },
+        { label: "Hora Mal Súbito", valor: atendimento.horaMalSubito },
+        { label: "Ciclos Realizados", valor: atendimento.ciclos },
+        { label: "Endereço", valor: atendimento.endereco },
+        { label: "Hora da Emergência", valor: atendimento.horaEmergencia },
+        { label: "Data de Registro", valor: atendimento.dataRegistro },
+      ];
+
+      campos.forEach(c => {
+        doc.text(`${c.label}: ${c.valor}`, 20, y);
+        y += 10;
+      });
+  
+      // Gerar nome do arquivo baseado na dataRegistro
+    const nomeArquivo = `atendimento_${atendimento.dataRegistro.replace(/[:\/]/g, "_")}.pdf`;
+    doc.save(nomeArquivo);
+
+});
+
+  } else {
+    document.body.innerHTML = "<h2>Nenhum atendimento registrado ainda.</h2>";
+  }
+</script>
+
+</body>
+</html>
