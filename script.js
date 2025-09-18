@@ -11,12 +11,31 @@ const botaoRcp = document.querySelector('.item1');   // botão Massagem
 const botaoEmg = document.querySelector('.cabeca');  // botão Emergência
 const temporizadorEl = document.querySelector('#temporizador');
 const controle = document.querySelector('#controle-metronomo .metronomo');
-
+const contagem_ciclos = document.querySelector("#ciclos");
+let contador_ciclos = 0;
 // ===============================
 // Eventos principais
 // ===============================
 botaoRcp.addEventListener('click', iniciarPararRCP);
 botaoEmg.addEventListener('click', emergencia);
+
+  // Web Audio API
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  function playClick() {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = "square";        // tipo de onda
+      osc.frequency.value = 1000; // frequência (Hz) - som agudo
+      gain.gain.value = 0.2;      // volume
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05); // duração curta (~50ms)
+  }
 
 // ===============================
 // Funções de Emergência
@@ -75,6 +94,7 @@ function iniciarAlternancia() {
       controle.classList.add('desligado');
     }
     estadoMetronomo = (estadoMetronomo + 1) % 2;
+    playClick();
   }, 500);
 }
 
@@ -88,6 +108,8 @@ function resetar() {
   // Resetar classe visual
   controle.classList.remove('ligado', 'desligado');
   estadoMetronomo = 0;
+
+  contador_ciclos
 }
 
 // ===============================
@@ -98,7 +120,12 @@ function iniciarPararRCP() {
     // Ativar RCP
     botaoRcp.style.backgroundColor = '#B22222';
     botaoRcp.textContent = 'PARAR MASSAGEM CARDÍACA';
-
+    contador_ciclos +=1;
+    contagem_ciclos.innerText = contador_ciclos; 
+      // Em alguns navegadores o áudio só inicia após interação explícita
+    if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+     }
     iniciarAlternancia();
 
     // Iniciar temporizador
@@ -169,14 +196,15 @@ function iniciarPararRCP() {
     };
 
     // Mostra o mapa interativo para ajuste
-    function mostrarMapa() {
+      function mostrarMapa() {
+      // Mostra os elementos do mapa apenas quando o usuário quiser
       document.getElementById("mapContainer").style.display = "block";
       document.getElementById("info").style.display = "block";
 
-      // Verifica se a posição inicial foi definida
+      // Verifica se a posição inicial já foi detectada
       if (!initialPos) {
-        console.warn("Posição inicial ainda não definida. O mapa será carregado quando a localização estiver disponível.");
-        return; // Sai da função até que initialPos esteja definido
+        alert("A posição inicial ainda não foi detectada. Aguarde alguns segundos ou insira um endereço manualmente.");
+        return;
       }
 
       // Cria o mapa apenas se ainda não tiver sido criado
@@ -186,23 +214,24 @@ function iniciarPararRCP() {
           zoom: 16
         });
 
-        // Cria o marcador AdvancedMarkerElement
-        marker = new google.maps.marker.AdvancedMarkerElement({
+        // Marker clássico
+        marker = new google.maps.Marker({
           position: initialPos,
           map: map,
           draggable: true
         });
 
-        // Atualiza o endereço no input
+        // Atualiza o endereço inicial
         atualizarEndereco(initialPos);
 
-        // Atualiza o endereço quando o usuário arrasta o marcador
+        // Atualiza endereço quando o marcador é arrastado
         marker.addListener("dragend", () => {
           const pos = marker.getPosition();
           atualizarEndereco(pos);
         });
       }
     }
+
 
 
     function atualizarEndereco(latlng) {
